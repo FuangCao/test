@@ -1,11 +1,7 @@
 #!/bin/sh /etc/rc.common
 
-START=95
-WGET="wget -T 10 -t 5 --no-check-certificate"
-
-boot() {
-	return 0
-}
+START=99
+WGET="/usr/bin/wget -T 10 -t 5 -q --no-check-certificate"
 
 cavan_daemon() {
 	delay=0
@@ -16,9 +12,8 @@ cavan_daemon() {
 
 	while :;
 	do
-		md5sum -c md5sum.txt && break
+		md5sum -c ./md5sum.txt && break
 
-		echo "delay = ${delay}"
 		sleep ${delay}
 		[ ${delay} -lt 60 ] && let delay=1+${delay}
 
